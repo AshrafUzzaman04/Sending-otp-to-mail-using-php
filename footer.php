@@ -31,7 +31,6 @@ swal({ text: data, icon: "error", button: "Close", });
   } else {
 
   window.location.href = "varification.php";
-  <?php unset($_SESSION['post']) ?>
   }
           }
         });
@@ -53,25 +52,16 @@ $.ajax({ type: "POST", url: "fu.php",
   if (data != 'ok') {
 swal({ text: data, icon: "error", button: "Close", });
   } else {
-
-    <?php 
-if(isset($_SESSION['status']) && $_SESSION['status'] != ''){
-?>
-       swal({
-        title: "<?= $_SESSION['status'] ?>",
+swal({
+        title: "Registration Successful!",
         //   text: "You clicked the button!",
-        icon: "<?= $_SESSION['status_code']  ?>",
+        icon: "success",
         buttons: {
-        confirm : {text:'ok',className:'bg-success'},
+        confirm : {text:'Ok',className:'bg-success'},
     },
         }).then(function() {
     window.location = "./";
-});;         
-
-<?php
-unset($_SESSION['status']);
-}
-?>
+}); 
   }
           }
         });
@@ -89,30 +79,22 @@ unset($_SESSION['status']);
         var password = $('#password').val();
 
 $.ajax({ type: "POST", url: "fu.php",
-   data: { "signIn": "signIn", "email": email, "password": password},
+   data: { "login": "signIn", "email": email, "password": password},
    success: function (data) {
   if (data != 'ok') {
 swal({ text: data, icon: "error", button: "Close", });
   } else {
 
-    <?php 
-if(isset($_SESSION['status']) && $_SESSION['status'] != ''){
-?>
-       swal({
-        title: "<?= $_SESSION['status'] ?>",
+swal({
+        title: "Login Successful!",
         //   text: "You clicked the button!",
-        icon: "<?= $_SESSION['status_code']  ?>",
+        icon: "success",
         buttons: {
-        confirm : {text:'ok',className:'bg-success'},
+        confirm : {text:'Ok',className:'bg-success'},
     },
         }).then(function() {
     window.location = "./";
-});;         
-
-<?php
-unset($_SESSION['status']);
-}
-?>
+}); 
   }
           }
         });

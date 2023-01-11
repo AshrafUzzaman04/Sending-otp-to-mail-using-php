@@ -1,4 +1,5 @@
 <?php 
+
 include_once("./dbInput.php");
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -99,13 +100,12 @@ else {
     exit('Username already exist!');
   }else{
 
-    $_SESSION['all_data'] = ["name" => $first_name ." " .  $last_name, "username" => $username, "email" => $email, 
-  "mobile" => $number, "password" => $password, "address" => $address, "country" => $country, "gender" => $gender, "dob" => $day . "-" . $month . "-" . $year ]; 
+    $_SESSION['all_data'] = $_POST;
+
     $_SESSION['mailiOTP'] = rand(100000, 999999); 
     $mailBody = "Your varification Code is ". $_SESSION['mailiOTP'];
 
     mailSender($email, $mailBody);
-
     exit('ok');
   }
 
@@ -120,41 +120,44 @@ else {
 
 if (isset($_POST['confirm'])){
   if (isset($_POST['OTP'])){
+
+    $first_name = $_SESSION['all_data']['first_name'];
+    $last_name = $_SESSION['all_data']['last_name'];
+    $day = $_SESSION['all_data']['day'];
+    $month = $_SESSION['all_data']['month'];
+    $year = $_SESSION['all_data']['day'];
+    $gender = $_SESSION['all_data']['gender'];
+    $address = $_SESSION['all_data']['address'];
+    $country = $_SESSION['all_data']['country'];
+    $username = $_SESSION['all_data']['username'];
+    $number = $_SESSION['all_data']['number'];
+    $email = $_SESSION['all_data']['email'];
+    $password = $_SESSION['all_data']['password'];
     $OTP = $_POST['OTP'];
 
     if(empty($OTP)){
       exit('Please Enter your confirmation code!');
-    }
-    else{
-
-      if($_SESSION['mailiOTP'] != $OTP){
-        exit('Please enter a valid code!');
+    }elseif ($_SESSION['mailiOTP'] != $OTP){
+      exit('Please enter a valid code!');
     }else{
-
-      $_SESSION['all_data'] = ["name" => $first_name ." " .  $last_name, "username" => $username, "email" => $email, 
-  "mobile" => $number, "password" => $password, "address" => $address, "country" => $country, "gender" => $gender, "dob" => $day . "-" . $month . "-" . $year ];
-
-        $insert_data_query = "INSERT INTO `user` (`name`, `username`, `email`, `mobile`, `password`,`address`, `country`, `gender`, `dob`) VALUES ('$first_name . $last_name', '$username', '$number', '$password', '$address', '$country', '$gender', '$day . "-" . $month . "-" . $year ')";
+        $insert_data_query = "INSERT INTO `user`( `name`, `username`, `email`, `mobile`, `password`,  `address`, `country`, `gender`, `dob`) VALUES ('$first_name  $last_name ','$username','$email','$number','$password','$address','$country ','$gender','$day-$month-$year')";
         $insert_data = $connect->query($insert_data_query);
 
         if(!$insert_data){
-          exit('Something went wrong!');
+           exit('Something went wrong!');
+        }else{
+             exit('ok');       
         }
-        $_SESSION['status'] = "Registration Successfully!";
-        $_SESSION['status_code'] = "success";
-
-        
-        $OTP =  $_SESSION['mailiOTP'] = null;
     }
   }
 
  }
-}
+
 
 
 // login 
 
-if (isset($_POST['signIn'])){
+if (isset($_POST['login'])){
 if (isset($_POST['email'],$_POST['password'])) {
   $email = $_POST['email'];
   $password = $_POST['password'];
@@ -166,18 +169,15 @@ if (isset($_POST['email'],$_POST['password'])) {
     exit('Enter your password');
   }
   else{
-    $select_data_email = $connect->query("SELECT * FROM `user` WHERE `email` = $email");
-    $select_data_pass =  $connect->query("SELECT * FROM `user` WHERE`password` = $password");
+  $select_all_email = $connect->query("SELECT * FROM `user` WHERE `email` = '$email'");
+  $select_all_password = $connect->query( "SELECT * FROM `user` WHERE `password` = '$password'");
 
-    if($select_data->num_rows !== 1){
-        exit('Your email can\'t exist!');
-    }elseif($select_data_pass->num_rows !== 1){
-        exit('Your email can\'t exist!');
+    if($select_all_email->num_rows !== 1){
+        exit("Your email can't exist!");
+    }elseif($select_all_password->num_rows !== 1){
+        exit("Your password can't exist!");
     }else{
-      $_SESSION['status'] = "Congratulations! Login Successfully.";
-      $_SESSION['status_code'] = "success";
-
-      $email = $password = "";
+      exit('ok');
     }
   }
 

@@ -5,9 +5,9 @@
 
 <!-- header -->
     <header>
-      <div class="img-div">
+      <a class="img-div" href="./">
         <img src="./images/familysearch-tree.dc22204d2135c739.svg" alt="" />
-      </div>
+      </a>
     </header>
     <section class="form-body container mx-auto">
       <div
@@ -39,7 +39,7 @@
           style="border-radius: 12px; max-width: 450px"
         >
           <h3 class="fw-medium text-success text-center">Create an Account</h3>
-          <hr class="col-6 mx-auto my-0" style="border: 1px solid green" />
+          <hr class="col-8 mx-auto my-0" style="border: 1px solid green" />
           <br />
           <form action="" autocomplete="off">
             <!-- 2 column grid layout with text inputs for the first and last names -->
@@ -254,9 +254,9 @@
  <div class="col">
                 <select class="form-select" id="gender" aria-label="Default select example">
                   <option value="0">Select Gender</option>
-                  <option value="1">Male</option>
-                  <option value="2">Female</option>
-                  <option value="3">Other</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
                 </select>
 
               </div>

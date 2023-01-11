@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2023 at 04:43 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.28
+-- Generation Time: Jan 11, 2023 at 09:39 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,11 +38,18 @@ CREATE TABLE `user` (
   `address` varchar(1000) NOT NULL,
   `country` varchar(500) DEFAULT NULL,
   `gender` varchar(30) DEFAULT NULL,
-  `dob` varchar(25) NOT NULL,
+  `dob` date NOT NULL,
   `img` varchar(5000) NOT NULL,
   `join_t` varchar(30) DEFAULT NULL,
   `date_time` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `name`, `username`, `email`, `mobile`, `password`, `status`, `address`, `country`, `gender`, `dob`, `img`, `join_t`, `date_time`) VALUES
+(79, 'fadsf  sdfasd ', 'af', 'ashraf.uzzaman04082004@gmail.com', 'aaaafsasdf', 'asdfasdf', '', 'afadsf', 'asfdaf ', 'Male', '2005-06-05', '', NULL, '2023-01-11 20:34:11');
 
 --
 -- Indexes for dumped tables
@@ -62,7 +69,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(250) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

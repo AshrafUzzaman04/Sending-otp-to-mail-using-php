@@ -1,10 +1,6 @@
 <?php
 include_once("./dbInput.php");
 include_once("header.php");
-include_once("fu.php");
-if(!isset($_SESSION['all_data']['email'])){
-    header("location: ./");
-} 
 ?>
 
 <!-- header -->
@@ -23,7 +19,7 @@ if(!isset($_SESSION['all_data']['email'])){
         <form action="" autocomplete="off">
             <div class="col mb-4" style="width: 50%;">
                     <div class="form-outline">
-                      <input type="number" id="OTP" class="form-control" name="OTP" value="<?= $OTP ?? null ?>"/>
+                      <input type="number" id="OTP" class="form-control" name="OTP"/>
                       <label class="form-label" for="form3Example2"
                         >OTP</label
                       >
